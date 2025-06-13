@@ -1,0 +1,29 @@
+<div class="game-container">
+  <div class="status">
+    @if (!gameEnded) {
+      <p>Current Player: {{ currentPlayer }}</p>
+    }
+    @if (winner) {
+      <p class="winner-status">
+        {{ winner === 'draw' ? "It's a Draw!" : 'Winner: ' + winner }}
+      </p>
+    }
+  </div>
+
+  <div class="board">
+    @for (square of squares; track $index) {
+      <button
+        class="square"
+        [class.x]="square === 'X'"
+        [class.o]="square === 'O'"
+        (click)="makeMove($index)"
+      >
+        {{ square }}
+      </button>
+    }
+  </div>
+
+  <button class="restart-button" (click)="newGame()">
+    Restart Game
+  </button>
+</div>
